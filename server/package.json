@@ -1,0 +1,13 @@
+{
+  "name": "server",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "start": "tsc-watch --project . --outDir ./dist --onSuccess \"node ./dist/src/index.js\""
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "tsc-watch": "^4.2.3",
+    "typescript": "^3.8.3"
+  }
+}
