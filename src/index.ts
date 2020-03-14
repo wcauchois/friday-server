@@ -7,6 +7,7 @@ import http = require("http");
 import { createConnection } from "typeorm";
 import Post from "./entity/Post";
 import PostResolver from "./resolvers/PostResolver";
+import cors = require("cors");
 
 async function main() {
   const dbUrl = process.env.DATABASE_URL ?? `postgresql://postgres@localhost:5432/friday`;
@@ -25,6 +26,8 @@ async function main() {
   });
 
   const app = express();
+
+  app.use(cors());
 
   app.use('/graphql', graphqlHTTP({
     schema,
