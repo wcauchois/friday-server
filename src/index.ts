@@ -9,12 +9,10 @@ import Post from "./entity/Post";
 import PostResolver from "./resolvers/PostResolver";
 
 async function main() {
+  const dbUrl = process.env.DATABASE_URL ?? `postgresql://postgres@localhost:5432/friday`;
   await createConnection({
     type: "postgres",
-    host: "localhost",
-    port: 5432,
-    username: "postgres",
-    database: "friday",
+    url: dbUrl,
     entities: [
       Post
     ],
@@ -34,8 +32,9 @@ async function main() {
   }));
 
   const httpServer = http.createServer(app);
-  httpServer.listen(8000, () => {
-    console.log(`HTTP server listening`);
+  const port = process.env.PORT ? parseInt(process.env.PORT) : 8000;
+  httpServer.listen(port, () => {
+    console.log(`HTTP server listening on port ${port}`);
   });
 }
 

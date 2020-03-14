@@ -3,7 +3,8 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
-    "start": "tsc-watch --project . --outDir ./dist --onSuccess \"node ./dist/index.js\"",
+    "start": "node ./dist/index.js",
+    "watch": "tsc-watch --project . --outDir ./dist --onSuccess \"node ./dist/index.js\"",
     "build": "tsc"
   },
   "license": "MIT",
