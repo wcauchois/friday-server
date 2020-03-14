@@ -4,6 +4,8 @@ import { ObjectType, ID, Field, Query, Resolver, Args, Arg, buildSchema } from "
 import express = require("express");
 import graphqlHTTP = require('express-graphql');
 import http = require("http");
+import { createConnection } from "typeorm";
+import Post from "./entity/Post";
 
 @ObjectType()
 class Recipe {
@@ -39,6 +41,19 @@ class RecipeResolver {
 }
 
 async function main() {
+  await createConnection({
+    type: "postgres",
+    host: "localhost",
+    port: 5432,
+    username: "postgres",
+    database: "friday",
+    entities: [
+      Post
+    ],
+    synchronize: true,
+    logging: true
+  });
+
   const schema = await buildSchema({
     resolvers: [RecipeResolver]
   });
